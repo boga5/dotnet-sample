@@ -15,3 +15,17 @@ steps:
     command: 'build'
     projects: 'async/async-and-await/cs/SyncExample/SyncExample.csproj'
     arguments: '--configuration Release'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: 'async/async-and-await/cs/SyncExample/SyncExample.csproj'
+    arguments: '--configuraion Release --output sampleDotNet'
+    zipAfterPublish: false
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'sampleDotNet'
+    ArtifactName: 'sampleDotNet'
+    publishLocation: 'Container'
